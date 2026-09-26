@@ -1,17 +1,17 @@
-# DinoServer v1.0.19 — Windows instructions
+# DinoServer v1.1.19 — Windows instructions
 
 This guide is for running the server on a **Windows computer** and playing JPB on an Android phone or emulator. The Windows download includes the Python runtime; you do not install Python or Termux for this package. Cache files and the game are separate downloads.
 
 **Installation video:** [Watch the supplied installation video, starting at 1:18](https://www.youtube.com/watch?v=RTyVlTEICQQ&t=78s). Use the written steps below for this release's folder layout and update source; an older video may show different buttons or folders.
 
-## 1. How to install DinoServer 1.0.19
+## 1. How to install DinoServer 1.1.19
 
 ### 1.1 Choose the correct download
 
 1. Open [DinoServer downloads](https://github.com/discordsussy12345-cpu/JPB-DinoServer-Downloads/releases/latest).
 2. Expand **Assets** if the files are hidden.
-3. Download **DinoServer-Windows-v1.0.19.zip**. This is the complete portable Windows application.
-4. Do not choose **Source code (zip)**, **Source code (tar.gz)**, the Linux source ZIP, or **DinoServer-Update-v1.0.19.zip** for a first installation. The update ZIP is for the updater, not a standalone installation.
+3. Download **DinoServer-Windows-v1.1.19.zip**. This is the complete portable Windows application.
+4. Do not choose **Source code (zip)**, **Source code (tar.gz)**, the Linux source ZIP, or **DinoServer-Update-v1.1.19.zip** for a first installation. The update ZIP is for the updater, not a standalone installation.
 5. Wait until the download finishes. A browser file ending in `.crdownload` or `.part` is incomplete.
 6. Allow several GB of free disk space for the cache download, extracted cache, and backups. You need internet for downloading these files; local play still needs a working connection between the game device and server computer.
 
@@ -19,14 +19,14 @@ This guide is for running the server on a **Windows computer** and playing JPB o
 
 1. If replacing an older server, close JPB, press **Stop server** in the old launcher, and close the launcher. Closing its window alone does not stop a running server. Keep the old folder intact until your saves work in the new one.
 2. In File Explorer, open **Downloads** and find the completed Windows ZIP.
-3. Right-click it and choose **Extract All…**. Choose a new folder you can find again, for example `C:\Games\JPB-1.0.19`. Click **Extract**.
+3. Right-click it and choose **Extract All…**. Choose a new folder you can find again, for example `C:\Games\JPB-1.1.19`. Click **Extract**.
 4. Open the extracted **DinoServer** folder. You should see **DinoServer.exe**, **server**, and **docs** beside each other.
 5. Run the EXE from that extracted folder. Do not run inside the ZIP, move only the EXE onto your desktop, or merge this download into the old folder.
 6. For a desktop shortcut, right-click the EXE and create a shortcut. Move the shortcut, not the EXE.
 7. If Windows flags the download, check that it came from the release linked above. Do not disable antivirus globally. An incomplete or quarantined file must be resolved before continuing.
 8. Open **DinoServer.exe**. The server should remain stopped until you press **Start server**. Opening Diagnostics or Cache Delivery does not intentionally start it.
 
-**Already have a park?** Complete section 2 before your first game login. Do not uninstall JPB or clear its data to install the server update.
+**Already have a park?** Back up the old folder first, then follow section 2. The guided importer requires one guest login on the new server to establish its current device/save ID. Do not uninstall JPB or clear its data to install the server update.
 
 ### 1.3 Install the Android cache
 
@@ -59,7 +59,7 @@ This guide is for running the server on a **Windows computer** and playing JPB o
 - To stop: allow the game to finish saving, close JPB, then press **Stop server**. Keep **Restart** for an intentional restart; do not use it while a save or cache import is underway.
 - If your computer's IP changes, update the Android routing app and DinoServer's IP setting. Restart the server so its cache manifest uses the current address.
 - This download checks [JPB-DinoServer-Updates](https://github.com/discordsussy12345-cpu/JPB-DinoServer-Updates/releases/latest). Future releases must have a higher version to be offered.
-- An old 1.0.19 package still checking somebody else's repository will not discover this same-version replacement automatically. Install this full package once and migrate your saves using section 2. After that, use the launcher's update prompt for future versions.
+- Existing 1.0.19 installations already using our update feed can update to 1.1.19 in the launcher. If your old package checks a different repository, install this full Windows package once and migrate using section 2.
 - The updater preserves personal saves and configuration. Still keep a separate backup before applying any update. An update ZIP must never contain somebody else's saves, recovery database, device links, or running-session locks.
 
 ### 1.6 If something does not work
@@ -70,62 +70,65 @@ This guide is for running the server on a **Windows computer** and playing JPB o
 | Cache download fails | Check internet and free space; keep the PC awake and retry. Wait for verification as well as download. |
 | Status page cannot be reached from Android | Start the server deliberately, verify the LAN IP, same-network access, firewall, and whether another program owns the ports. Use **Diagnostics** and **Logs**. |
 | Status works but JPB fails | Check original-domain versus IP-patched APK, the Android routing app, Android / Emulator profile, and server log messages. |
-| `[GUEST-RECOVERY]` at login | Follow section 2.5; a changed device ID needs linking to its existing park. |
+| `[GUEST-RECOVERY]` at login | Follow section 2.4; a changed device ID needs linking to its existing park. |
 | `[SAVE-LOCK]` at login | Close all copies of the game using that park, stop duplicate server instances, then stop/start this server normally and retry after the old session expires. Keep the exact log message if it persists. Do not delete a live SQLite database or disable save protection. |
-| A new empty park appears | Stop playing immediately. Keep both folders/saves and follow section 2.5. Do not overwrite your original park with the empty one. |
+| A new empty park appears | Stop playing immediately. Keep both folders/saves and follow section 2.4. Do not overwrite your original park with the empty one. |
 
-## 2. How to move your guest saves
+## 2. Import an old guest save in 1.1.19
 
-### 2.1 Understand what you are moving
+> **MUST PLAY GAME ONCE FIRST TO GET DEVICE/SAVE ID.**
 
-A guest save is normally a file named **D-…json**, for example `D-example.json`. The actual filename contains the player's identifier; keep it unchanged. The save contains your park progress. The cache contains shared game assets and is not a substitute for your save. Copying the game APK also does not copy the server save.
+Open **Guest Saves** in the left sidebar, directly below **Cache Delivery**. It contains **Import old guest save**, **Restore existing park / changed device ID**, and **Repair guest save**. Settings > Project files also has an Open Guest Saves shortcut.
 
-Older releases can use `DinoServer\guest_saves` or `DinoServer\guest\_saves`. This release uses **`DinoServer\server\guest_saves`**. Use the actual folder containing your existing JSON saves, not an empty similarly named folder.
+### 2.1 Back up your old park
 
-### 2.2 Stop everything and make a backup first
+1. Allow the game to finish saving, close JPB, stop the old server and close its launcher.
+2. Copy the entire old server folder to a separate dated backup. Keep your original folder intact.
+3. Set up the new extracted 1.1.19 server, cache and connection using section 1. Keep the new EXE and server scripts supplied with this release.
 
-1. Close JPB on every phone/emulator using this server. Wait for any visible saving operation to finish first.
-2. In the old launcher press **Stop server**, wait for stopped status, then close it. Stop the new server too if you opened it.
-3. In File Explorer enable **View → Show → File name extensions** (Windows 11) or **View → File name extensions** (Windows 10). This makes `.json` and `.zip` visible.
-4. Copy the **entire old DinoServer folder** to a separate backup location, such as another drive. Name the backup with today's date. Wait until copying finishes; do not merely create a shortcut.
-5. Keep the original folder and backup until you have tested the new installation. Copy files in the next steps; do not cut/move your only originals.
+A guest save is normally a D-….json file in the old guest_saves folder. Older layouts may keep that folder at the installation root; the compact layout uses server/guest_saves. Cache files and the game APK do not contain your server park.
 
-### 2.3 Copy the saves into the new folder
+**Already updated in place and your existing park loads correctly?** You do not need to import it again. The updater preserves your saves and configuration. Import is for bringing progress from another folder or save file.
 
-1. Open the old save folder described in 2.1.
-2. Select the guest `.json` files you need. If migrating the whole server, copy all player save files. Preserve filenames exactly.
-3. Open the new extracted **DinoServer** folder, then **server**.
-4. Open **guest_saves**. If it does not exist yet, create a folder with that exact name.
-5. Paste the files directly inside it. Correct: `DinoServer\server\guest_saves\D-….json`. Incorrect: `DinoServer\server\guest_saves\guest_saves\D-….json`.
-6. If Windows asks to replace an existing file, cancel until you know which copy has the wanted progress. Back up the destination too. Do not choose Replace All blindly.
-7. Copy the old `save_backups` folder into the new `server\save_backups` if you want the existing recovery history.
-8. Your old Android cache can be copied into `server\cache_android`, or downloaded through Cache Delivery. Do not put it inside `guest_saves`.
+### 2.2 Play once on the new server
 
-### 2.4 Preserve your own device links and recovery records
+1. Start the new server and connect JPB to it.
+2. Choose **Play as Guest** and actually enter the park. This allows the server to create and record the current device/save identity; simply opening the launcher is not enough.
+3. Let it save, close JPB completely, and press **Stop server**.
+4. Open **Guest Saves > Import old guest save**. Your current save should appear. If it does not, check the connection and complete the first guest login, then click **Refresh current saves**.
 
-1. Find the old **config** folder: either `DinoServer\config` or `DinoServer\server\config`.
-2. With both servers fully stopped, copy these **if present** into the new `DinoServer\server\config`: `device_links.json`, `guest_recovery.sqlite3`, `whitelist.json`, and `local_settings.json`.
-3. If `guest_recovery.sqlite3-wal` or `guest_recovery.sqlite3-shm` exists alongside that database, preserve it with the same database while stopped. Do not mix database files from different installations. The whole-folder backup in 2.2 preserves the original set.
-4. A version such as 1.0.14 may not have a recovery database. That is normal; do not download someone else's or invent one.
-5. Copy only your own personal configuration. Do not replace the entire new config folder: its supplied manifests/options belong to the new release. Recheck the IP after copying local settings, especially on a different computer.
-6. Do **not** copy the old `run` folder, session/lock databases, old EXE, old server scripts, or logs over the new installation. Runtime coordination is recreated locally. Existing saves and device mappings are preserved separately.
+If login is waiting for device approval, see section 2.4. Keep the existing game installation and its app data.
 
-### 2.5 Link a changed device ID to the correct park
+### 2.3 Select and import your old park
 
-Changing the game APK/signature, reinstalling it, clearing app data, or using a different Android device/profile can change the ID presented to the server. Installing this Windows release cannot force every game APK to keep its old ID.
+1. Click **Select old folder** and select the old release folder (for example 1.0.18), or its **guest_saves** folder. Alternatively, click **Select guest save file** and choose the old JSON directly.
+2. If several old parks are found, choose the correct one using its name, level and filename. The importer does not guess between multiple parks.
+3. Review **CURRENT DEVICE / SAVE TO RESTORE**. If multiple current saves exist, select the device/save you just played. Importing replaces this selected park's progress.
+4. Click **Import old guest save**. Review the old park, destination and device IDs in the confirmation, then confirm.
+5. Wait for the success message. Start the server yourself, fully reopen JPB, and choose **Play as Guest**.
 
-1. After copying the saves, start the new server and try **Play as Guest** once from the affected device. This records the device request. If recovery is required, the failed login is a protection against silently assigning the wrong park.
-2. Return to DinoServer's save/import controls and click **Restore existing park / changed device ID**.
-3. Select the current device ID from the first list. Waiting requests appear first. If multiple people are connecting, identify whose request it is before approving it.
-4. In the second list, choose that player's original save. It shows the save ID, name, and level. Verify against your old save/backup.
-5. Click **Restore selected park** and confirm the displayed device-to-save link. Do not click **Create new park instead** when trying to recover progress.
-6. Retry guest login. This links the device to the existing file; it does not merge parks or delete duplicates.
-7. If no request appears, check that JPB is reaching this server. If no complete saves appear, recheck the destination path and that you copied the full JSON file.
+The imported copy automatically takes the selected current save's filename. **Leave your old filename and the new server's device/recovery/lock databases intact.** The current device binding remains in place. The original old file is unchanged, and copies of the replaced save and imported data are stored in **server/save_backups/imports**.
 
-### 2.6 Verify the migration before deleting anything
+The selected old save supplies the progress, wallet and claim history, including aquatic/glacier data actually present in it. The importer cannot reconstruct missing data and does not combine unrelated parks. A live save lock blocks import instead of being forcibly cleared.
 
-1. Confirm the expected player level, Bucks, resources, dinosaurs and buildings.
-2. Visit each already-unlocked park: Surface, Aquatic, and Glacier. Locked areas should stay locked.
-3. Make a small normal change, let it save, close JPB, and log in again. Confirm it persists.
-4. Check that you are using the new server folder by viewing its logs and save file modification time.
-5. Keep the dated backup even after success. If something is missing, stop and restore from that backup rather than editing currency or account IDs by hand.
+### 2.4 If the device is awaiting approval
+
+Open **Guest Saves > Restore existing park / changed device ID** after trying guest login once.
+
+- **The correct old park is already in this server:** select the current device and that existing park, then use **Restore selected park**. Retry guest login. No import or new park is needed.
+- **You are deliberately importing a park from another folder:** select the waiting device and approve **Create new park instead**, enter that new park once, close JPB and stop the server, then use the guided import in sections 2.2–2.3. The selected new park is the destination that will be replaced.
+
+Check whose device request you are approving on a multi-player server. Keep session databases and ownership protections intact. If the save is still in use, close other copies of the game and stop duplicate server instances before retrying.
+
+### 2.5 Verify the imported park
+
+1. Check the expected level, Bucks, resources, dinosaurs and buildings.
+2. Visit each previously unlocked park: Surface, Aquatic and Glacier.
+3. Make a small normal change, allow it to save, close JPB and reconnect. Confirm the change persists.
+4. Keep the old folder and backups. If the wrong park was selected or progress is missing, stop and retain both copies before attempting recovery.
+
+## 3. Version numbering and known investigation
+
+Maintenance releases follow **1.1.19 → 1.2.19 → 1.3.19** and onward. **1.20.0** is reserved for future popup/promotional work.
+
+Reports of XP bars dropping to zero and players stalling at levels such as 19 or 60 are still under investigation. **1.1.19 does not claim to fix those reports.**
