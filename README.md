@@ -1,5 +1,9 @@
 # JPB DinoServer downloads
 
+**September 27 update:** [Add Indominus to the surface offer rotation](WINDOWS-INSTRUCTIONS.md#18-add-indominus-to-the-surface-offer-rotation) using the published [rotation configuration](offer_rotation.json). This is a manual Windows 1.1.19 configuration update; existing release ZIPs and the automatic updater are unchanged.
+
+**Emulator or phone stuck connecting?** Follow the new [Windows Firewall and LDPlayer troubleshooting steps](WINDOWS-INSTRUCTIONS.md#17-status-page-keeps-loading-windows-firewall-and-ldplayer), including inbound TCP ports **80, 9943 and 9933** and a browser status check.
+
 [Download DinoServer for Windows](https://github.com/discordsussy12345-cpu/JPB-DinoServer-Downloads/releases/tag/v1.1.19)
 
 - **Windows 1.1.19:** download `DinoServer-Windows-v1.1.19.zip`, then follow [Windows installation and guest-save import](WINDOWS-INSTRUCTIONS.md).

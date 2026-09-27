@@ -74,6 +74,45 @@ This guide is for running the server on a **Windows computer** and playing JPB o
 | `[SAVE-LOCK]` at login | Close all copies of the game using that park, stop duplicate server instances, then stop/start this server normally and retry after the old session expires. Keep the exact log message if it persists. Do not delete a live SQLite database or disable save protection. |
 | A new empty park appears | Stop playing immediately. Keep both folders/saves and follow section 2.4. Do not overwrite your original park with the empty one. |
 
+### 1.7 Status page keeps loading: Windows Firewall and LDPlayer
+
+With DinoServer running, open `http://COMPUTER-IP:9943/status/2.0/` in both the Windows browser and the browser inside Android/LDPlayer. Replace COMPUTER-IP with the Windows PC's LAN IP shown in Overview. Use HTTP, not HTTPS. Inside LDPlayer, 127.0.0.1 points to the emulator, not the Windows server.
+
+- **Neither browser gets a response:** check the displayed IP, server startup errors and Diagnostics first.
+- **Windows responds but Android/LDPlayer hangs:** check the inbound firewall rule below, then the emulator network path.
+- **Android/LDPlayer returns `"status":true` but JPB fails:** basic HTTP access works; check the game hosts entries and TCP 9933 access, then capture a fresh login log. A status response alone does not prove game login works.
+- Logs showing only `status ok source=local` are the PC's loopback checks. They do not prove the emulator reached the server.
+
+**Allow DinoServer's inbound TCP ports on the Windows PC:**
+
+1. Press **Win + R**, enter `wf.msc`, then press Enter. Administrator access may be required.
+2. Select **Inbound Rules > New Rule > Port**.
+3. Select **TCP > Specific local ports** and enter `80,9943,9933`.
+4. Select **Allow the connection**.
+5. Select the profile matching the active connection. Use **Private** for your trusted home network. A Private-only rule will not apply if Windows classifies that connection as Public; check the active profile in Windows network settings instead of selecting every profile blindly.
+6. Name the rule **DinoServer TCP**, then click **Finish**. Keep Windows Firewall enabled.
+7. Retry the status URL inside Android/LDPlayer with DinoServer running.
+
+These steps follow [Microsoft's firewall guidance](https://support.microsoft.com/en-us/windows/security/firewall/risks-of-allowing-apps-through-windows-firewall). They add a local inbound rule; router port forwarding is not needed for a same-PC emulator or same-home-network setup.
+
+**LDPlayer still cannot reach it, but the Windows browser can:**
+
+Try **LDPlayer Settings > Network > Network Bridging**. Enable it, install the bridge driver if prompted, select the PC's active Wi-Fi/Ethernet adapter and choose **DHCP**. Save and restart LDPlayer, then retry the status URL. Keep the game hosts entries pointing to the **Windows PC's IP**, not the emulator's new IP. Do not assign the emulator the same IP as the PC. See [LDPlayer's official bridge guide](https://www.ldplayer.net/support/how-to-set-up-network-bridging-on-the-android-emulator-ldplayer.html). Bridging is a troubleshooting option, not a guaranteed fix for every timeout.
+
+### 1.8 Add Indominus to the surface offer rotation
+
+The updated [offer_rotation.json](offer_rotation.json) adds **Indominus** to the surface add-on candidate pool. It follows the existing scheduled rotation; it is not guaranteed to be the currently featured offer. An already selected offer can remain until the next scheduled rotation.
+
+This is a **manual configuration update for Windows 1.1.19**, not a new EXE or automatic updater release. Existing release ZIPs are unchanged, and the updater preserves personal configuration.
+
+1. Close JPB, stop DinoServer and close the launcher.
+2. Back up `DinoServer/server/config/offer_rotation.json`.
+3. If you use the standard configuration, open the linked JSON, use GitHub's **Download raw file** button and replace that configuration file with the downloaded JSON. Ensure the filename is exactly `offer_rotation.json`, not `.json.txt`.
+4. If you customized your rotation, keep your settings and append `"Indominus"` once to the `surface_addon_dinos` array instead. Keep valid JSON commas and quotes. Do not replace your custom configuration wholesale.
+5. Start DinoServer and reconnect JPB. Indominus is now eligible for the surface rotation; do not delete rotation state to force it to appear.
+
+This changes offer eligibility only. It does not repair guest saves, XP stalls or battle timers. These Windows file instructions do not apply to an Android controller's private app storage.
+
 ## 2. Import an old guest save in 1.1.19
 
 > **MUST PLAY GAME ONCE FIRST TO GET DEVICE/SAVE ID.**

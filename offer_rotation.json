@@ -1,0 +1,56 @@
+{
+  "duration_days": 3,
+  "event_weekend_only": true,
+  "event_start_weekday_utc": 4,
+  "event_start_hour_utc": 13,
+  "event_duration_days": 4,
+  "ltd_start_weekday_utc": 4,
+  "ltd_start_hour_utc": 13,
+  "ltd_duration_days": 3,
+  "event_random_weekend_dino": true,
+  "event_avoid_repeat": true,
+  "hammond_login_gift": {
+    "enabled": true,
+    "chance_percent": 100
+  },
+  "event_dinos": [
+    "Rajasaurus", "Deinosuchus", "Enchodus", "Diprotodon", "Baculites",
+    "Hyaenodon", "Utahraptor", "Platybelodon", "Dolichorhynchops",
+    "MarsupialLion", "Metriorhynchus", "Hyneria", "Odobenocetops",
+    "Arthropleura", "Edestus", "Shunosaurus", "Shastasaurus",
+    "Dreadnoughtus", "Giganotosaurus", "Suchomimus", "Castoroides",
+    "Euoplocephalus", "Archaeotherium"
+  ],
+  "surface_addon_dinos": [
+    "Carnotaurus", "Nasutoceratops", "Yutyrannus", "Tuojiangosaurus",
+    "Amargasaurus", "Tapejara", "Indominus"
+  ],
+  "aquatic_addon_dinos": [
+    "Trinacromerum", "Xiphactinus", "Archelon", "ColossalSquid",
+    "Dakosaurus", "Elasmosaurus", "Geosaurus", "Helicoprion", "Henodus",
+    "Koolasuchus", "Megalodon", "Mosasaurus", "Pliosaurus",
+    "Protosphyraena", "SeaScorpion"
+  ],
+  "glacier_addon_dinos": [
+    "Titanoboa", "Amebelodon", "Amphicyon", "Andrewsarchus", "Coryphodon",
+    "Daeodon", "Dodo", "Elasmotherium", "Gigantopithecus", "Indricotherium",
+    "Macrauchenia", "Mastodon", "TerrorBird", "Procoptodon", "Smilodon",
+    "Synthetoceras"
+  ],
+  "weekend_offer_enabled": true,
+  "weekend_start_weekday_utc": 4,
+  "weekend_start_hour_utc": 13,
+  "weekend_duration_days": 3,
+  "weekend_cycle_anchor_utc": "2019-11-08",
+  "bucks_market_rebates": [0.2, 0.3, 0.5],
+  "bucks_market_creatures": {
+    "1": ["Pteranodon", "Brontosaurus", "Stegosaurus", "Tyrannosaurus", "Kaprosuchus"],
+    "2": ["Gillicus", "Orthoceras", "Anomalocaris", "Hybodus"],
+    "9": ["Aepycamelus", "Meiolania", "Moeritherium"]
+  },
+  "bucks_market_buildings": {
+    "3": ["Build_HotAirBalloon_5x5"],
+    "4": ["AQBuild_ObsDeck000_4x4", "AQBuild_Garden000_4x4", "AQDeco_Galleon000_5x5"],
+    "5": ["ARBuild_HotSprin000_4X4", "ARBuild_PowerGen000_2X2"]
+  }
+}
